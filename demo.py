@@ -29,7 +29,10 @@ def demo(opt):
 
     # load model
     print('loading pretrained model from %s' % opt.saved_model)
-    model.load_state_dict(torch.load(opt.saved_model))
+    if torch.cuda.is_available():
+        model.load_state_dict(torch.load(opt.saved_model))
+    else:
+        model.load_state_dict(torch.load(opt.saved_model, map_location="cpu"))
 
     # prepare data. two demo images from https://github.com/bgshih/crnn#run-demo
     AlignCollate_demo = AlignCollate(imgH=opt.imgH, imgW=opt.imgW, keep_ratio_with_pad=opt.PAD)
