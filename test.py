@@ -9,9 +9,9 @@ import torch.utils.data
 import numpy as np
 from nltk.metrics.distance import edit_distance
 
-from utils import CTCLabelConverter, AttnLabelConverter, Averager
-from dataset import hierarchical_dataset, AlignCollate
-from model import Model
+from text_extractor_deep_text_recognition.utils import CTCLabelConverter, AttnLabelConverter, Averager
+from text_extractor_deep_text_recognition.dataset import hierarchical_dataset, AlignCollate
+from text_extractor_deep_text_recognition.model import Model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 

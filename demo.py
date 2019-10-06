@@ -5,9 +5,9 @@ import torch
 import torch.backends.cudnn as cudnn
 import torch.utils.data
 
-from utils import CTCLabelConverter, AttnLabelConverter
-from dataset import RawDataset, AlignCollate
-from model import Model
+from text_extractor_deep_text_recognition.utils import CTCLabelConverter, AttnLabelConverter
+from text_extractor_deep_text_recognition.dataset import RawDataset, AlignCollate
+from text_extractor_deep_text_recognition.model import Model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
