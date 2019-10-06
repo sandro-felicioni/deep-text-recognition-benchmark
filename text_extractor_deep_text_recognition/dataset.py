@@ -227,6 +227,33 @@ class RawDataset(Dataset):
         return (img, self.image_path_list[index])
 
 
+class RawImageDataset(Dataset):
+    """Dataset for a single image."""
+
+    def __init__(self, image: Image, opt):
+        self.opt = opt
+        self.image = image
+
+    def __len__(self):
+        return 1
+
+    def __getitem__(self, index):
+        try:
+            if self.opt.rgb:
+                img = self.image.convert('RGB')  # for color image
+            else:
+                img = self.image.convert('L')
+
+        except IOError:
+            print(f'Corrupted image for {index}')
+            # make dummy image and dummy label for corrupted image.
+            if self.opt.rgb:
+                img = Image.new('RGB', (self.opt.imgW, self.opt.imgH))
+            else:
+                img = Image.new('L', (self.opt.imgW, self.opt.imgH))
+
+        return (img, f'img-{index}')
+
 class ResizeNormalize(object):
 
     def __init__(self, size, interpolation=Image.BICUBIC):
